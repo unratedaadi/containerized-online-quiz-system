@@ -1,0 +1,36 @@
+{
+  "name": "quizroom",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "concurrently -k \"node --env-file-if-exists=.env --watch server/index.js\" \"vite --host 127.0.0.1\"",
+    "build": "vite build",
+    "start": "node --env-file-if-exists=.env server/index.js",
+    "test": "node --test tests/*.test.js",
+    "test:e2e": "playwright test",
+    "check": "npm test && npm run build",
+    "format": "prettier --write src server tests *.js *.json *.md docs/*.md",
+    "format:check": "prettier --check src server tests *.js *.json *.md docs/*.md"
+  },
+  "dependencies": {
+    "@fontsource-variable/manrope": "^5.3.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.0",
+    "helmet": "^8.1.0",
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.56.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "concurrently": "^9.0.0",
+    "prettier": "^3.9.10",
+    "vite": "^7.0.0"
+  }
+}

@@ -1,0 +1,22 @@
+services:
+  quizroom:
+    build: .
+    ports:
+      - "127.0.0.1:${HOST_PORT:-9180}:3001"
+    environment:
+      NODE_ENV: production
+      DEMO_MODE: ${DEMO_MODE:-true}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      SUPABASE_LEADERBOARD_URL: ${SUPABASE_LEADERBOARD_URL:-}
+      QUIZROOM_SYNC_TOKEN: ${QUIZROOM_SYNC_TOKEN:-}
+      ADMIN_NAME: ${ADMIN_NAME:-Quizroom Admin}
+    volumes:
+      - quizroom-data:/app/data
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  quizroom-data:
