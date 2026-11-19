@@ -85,7 +85,11 @@ export function createApp({
       const origin = req.get("origin");
       if (origin) {
         try {
-          if (new URL(origin).host !== req.get("host"))
+          const allowedOrigin = process.env.APP_ORIGIN;
+          if (
+            new URL(origin).host !== req.get("host") &&
+            origin !== allowedOrigin
+          )
             return next(fail(403, "This request is from an untrusted origin."));
         } catch {
           return next(fail(403, "Invalid request origin."));
